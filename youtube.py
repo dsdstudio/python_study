@@ -133,11 +133,9 @@ def retrieve_moviefile(o, movie_id):
 	print filename + ' downloading ... '
 
 	req = urllib2.Request(o['src'] +"&signature=" + o['sig']);
-	req.add_header('User-Agent','Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)');
-	req.add_header('Referer','http://www.youtube.com/');
-	req.add_header('Youtubedl-no-compression', 'True');
 	try:
 		wfile = urllib2.urlopen(req);
+		print wfile
 	except urllib2.URLError, e:
 		print e
 		print e.code
@@ -148,6 +146,7 @@ def retrieve_moviefile(o, movie_id):
 	lfile.close()
 	print 'finished ... '
 
+''' url로부터 Movie ID를 뽑아낸다. ''' 
 def extract_movie_id(url):
 	dict = parse_qs(url[url.find('?') +1:])
 	if dict.has_key('v'):
