@@ -11,6 +11,9 @@ yt downloader
 
 	$> ./youtube.py <youtube_url>
 
+video id명 + 확장자의 형태로 동영상파일이 실행한 경로에 저장됩니다. 
+
+예) `Mbw_aa1.mp4`
 
 
 ## 쓸만한 코드패턴 
