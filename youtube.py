@@ -18,7 +18,7 @@ class YoutubeURLOpener(urllib.FancyURLopener):
 quality_dict = {
 	5:{
 		   'format':'_',
-		   'quality':'240x400',
+		   'quality':'Low quality',
 		   'dimension': '240x400',
 		   'order':99
 	   },
@@ -101,7 +101,6 @@ def geturlfd(requesturl):
 ''' extract movie '''
 def extract_movies(urlfd):
 	movielist = []
-
 	for line in urlfd:
 		if line.strip() == "" or string.find(line, 'itag') == -1:
 			continue
@@ -135,7 +134,6 @@ def retrieve_moviefile(o, movie_id):
 	req = urllib2.Request(o['src'] +"&signature=" + o['sig']);
 	try:
 		wfile = urllib2.urlopen(req);
-		print wfile
 	except urllib2.URLError, e:
 		print e
 		print e.code
@@ -159,9 +157,9 @@ def extract_movie_id(url):
 ''' Entry point ''' 
 def main():
 	urllib._urlopener = YoutubeURLOpener()
-	url = argcheckandgeturl()
-	movie_id = extract_movie_id(url)
-	urlfd = geturlfd(url)
+	arg = argcheckandgeturl()
+	movie_id = extract_movie_id(arg)
+	urlfd = geturlfd('http://www.youtube.com/get_video_info?video_id=%s&ps=default&eurl=&gl=US&hl=en' % movie_id)
 	
 	movielist = extract_movies(urlfd)
 
