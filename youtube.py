@@ -10,10 +10,7 @@
 import re, sys, string, fileinput, urllib, urllib2, logging
 from urlparse import parse_qs
 
-class YoutubeURLOpener(urllib.FancyURLopener):
-	version = 'Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)'
-
-''' 퀄리티 코드 dict + array 로 구성하였다 '''
+''' 퀄리티 코드 dict로 구성하였다 '''
 ''' TODO 아직 못구한 코드에 대한정보 수집 필요 '''
 quality_dict = {
 	5:{
@@ -78,6 +75,21 @@ quality_dict = {
 		   'format':'webm',
 		   'quality':'360x640',
 		   'order':9
+	   },
+	44:{
+		   'format':'webm',
+		   'quality':'854x480',
+		   'order':9
+	   },
+	45:{
+		   'format':'webm',
+		   'quality':'1280x720',
+		   'order':9
+	   },
+	46:{
+		   'format':'webm',
+		   'quality':'1080x1920',
+		   'order':1
 	   }
 }
 
@@ -156,7 +168,6 @@ def extract_movie_id(url):
 	
 ''' Entry point ''' 
 def main():
-	urllib._urlopener = YoutubeURLOpener()
 	arg = argcheckandgeturl()
 	movie_id = extract_movie_id(arg)
 	urlfd = geturlfd('http://www.youtube.com/get_video_info?video_id=%s&ps=default&eurl=&gl=US&hl=en' % movie_id)
